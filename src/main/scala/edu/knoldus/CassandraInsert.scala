@@ -2,7 +2,6 @@ package edu.knoldus
 
 import com.datastax.driver.core.{Row, Session}
 import org.slf4j.{Logger, LoggerFactory}
-
 import scala.collection.JavaConverters._
 
 object CassandraInsert extends CassandraProvider{
@@ -11,9 +10,9 @@ object CassandraInsert extends CassandraProvider{
 
   def insertHashTags(hashTag: String): List[Row] = {
 
-    cassandraConn.execute(s"CREATE TABLE IF NOT EXISTS hashtagstable (hashtag text PRIMARY KEY) ")
+    cassandraConn.execute(s"CREATE TABLE IF NOT EXISTS hashtagtable (dateandtime timestamp PRIMARY KEY,hashtag text) ")
     log.info(s"Inserting $hashTag")
-    cassandraConn.execute(s"INSERT INTO hashtagstable(hashtag) VALUES ('$hashTag')").asScala.toList
+    cassandraConn.execute(s"INSERT INTO hashtagtable(dateandtime,hashtag) VALUES (dateOf(now()),'$hashTag')").asScala.toList
   }
 
 }
