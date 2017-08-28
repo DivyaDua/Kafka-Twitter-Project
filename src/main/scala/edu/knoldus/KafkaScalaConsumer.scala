@@ -82,7 +82,7 @@ object KafkaScalaConsumer extends App {
       */
     val records: ConsumerRecords[Nothing, String] = consumer.poll(100)
     for (record <- records.asScala) {
-      CassandraInsert.insertHashTags(record.value());
+      CassandraInsert.insertHashTags(record.value())
       println(record.value())
     }
   }

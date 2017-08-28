@@ -93,7 +93,7 @@ object KafkaScalaProducer extends App {
   val userStatuses = twiterApp.getUserStatuses("TheSassyGourmet ")
   userStatuses onComplete{
     case Success(statuses) => statuses.map(status => producer.send(new ProducerRecord[Nothing, String](topic, status)))
-    case Failure(ex) => println("Error getting feed " + ex.getMessage)
+    case Failure(ex) => println("Error while getting feed " + ex.getMessage)
   }
 
   /**
